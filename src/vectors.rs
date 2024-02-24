@@ -1,4 +1,4 @@
-pub fn max(vec: &Vec<isize>) -> isize {
+pub fn max(vec: &[isize]) -> isize {
     let mut max = isize::MIN;
 
     for num in vec.iter() {
@@ -10,7 +10,7 @@ pub fn max(vec: &Vec<isize>) -> isize {
     max
 }
 
-pub fn min(vec: &Vec<isize>) -> isize {
+pub fn min(vec: &[isize]) -> isize {
     let mut min = isize::MAX;
 
     for num in vec.iter() {

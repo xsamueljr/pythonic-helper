@@ -1,5 +1,5 @@
 pub fn count(text: String, substring: &str) -> usize {
-    text.matches(substring).count() as usize
+    text.matches(substring).count()
 }
 
 
