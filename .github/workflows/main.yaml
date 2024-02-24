@@ -48,7 +48,7 @@ jobs:
       
       - name: Publish
         # Run only when a new file is added, modified, or the Cargo.toml file is modified. (And the target is the `main` branch)
-        if: steps.rust_changes.outputs.modified || contains(github.event.commits[0].modified, 'Cargo.toml')) && (github.event_name == 'push' && github.ref == 'refs/heads/main') || (github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.head.ref == 'main' && github.pull_request.merged == true)
+        if: (steps.rust_changes.outputs.modified || contains(github.event.commits[0].modified, 'Cargo.toml')) && (github.event_name == 'push' && github.ref == 'refs/heads/main') || (github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.head.ref == 'main' && github.pull_request.merged == true)
         run: cargo publish
         env:
           CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_REGISTRY_TOKEN }}
