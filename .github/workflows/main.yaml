@@ -2,16 +2,12 @@ name: Test and Publish
 
 on:
   push:
-    branches:
-      - "main"
     paths:
       - "**.rs"
       - ".github/workflows/*.yaml"
       - ".github/workflows/*.yml"
       - "Cargo.toml"
   pull_request_target:
-    branches:
-      - "main"
     paths:
       - "**.rs"
       - ".github/workflows/*.yaml"
