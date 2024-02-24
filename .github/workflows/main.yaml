@@ -7,14 +7,14 @@ on:
       - ".github/workflows/*.yaml"
       - ".github/workflows/*.yml"
       - "Cargo.toml"
-  pull_request_target:
-    paths:
-      - "**.rs"
-      - ".github/workflows/*.yaml"
-      - ".github/workflows/*.yml"
-      - "Cargo.toml"
+
   pull_request:
+    branches: 
+      - "main"
     types:
+      - "opened"
+      - "synchronize"
+      - "reopened"
       - "closed"
 
 
