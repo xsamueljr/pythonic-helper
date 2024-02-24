@@ -29,7 +29,7 @@ jobs:
       - name: Check for Rust file modifications
         id: rust_changes
         run: |
-          if git diff --quiet ${{ github.event.before }} ${{ github.sha }} -- '**/*.rs'; then
+          if git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '\.rs' || true; then
             echo "Rust files unchanged"
           else
             echo "Rust files modified"
