@@ -26,35 +26,21 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4.1.1
       
-      - name: Check for Rust file modifications
-        id: rust_changes
-        run: |
-          if git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '\.rs' || true; then
-            echo "Rust files unchanged"
-          else
-            echo "Rust files modified"
-            echo "modified=true" >> $GITHUB_ENV
-          fi
-      
       - name: Upgrade Rust tools
-        if: env.modified
         run: rustup update
       
       - name: Build
-        if: env.modified
         run: cargo build
       
       - name: Clippy
-        if: env.modified
         run: cargo clippy
       
       - name: Test
-        if: env.modified
         run: cargo test
       
       - name: Publish
         # Run only when a new file is added, modified, or the Cargo.toml file is modified. (And the target is the `main` branch)
-        if: (env.modified || contains(github.event.commits[0].modified, 'Cargo.toml')) && (github.event_name == 'push' && github.ref == 'refs/heads/main') || (github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.head.ref == 'main' && github.pull_request.merged == true)
+        if: (contains(github.event.commits[0].added, 'src/') || contains(github.event.commits[0].modified, 'src/') || contains(github.event.commits[0].modified, 'Cargo.toml')) && (github.event_name == 'push' && github.ref == 'refs/heads/main') || (github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.head.ref == 'main' && github.pull_request.merged == true)
         run: cargo publish
         env:
           CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_REGISTRY_TOKEN }}
