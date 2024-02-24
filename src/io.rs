@@ -10,8 +10,6 @@ use std::io::{stdin, stdout, Write};
 /// println!("Please enter your name");
 /// let name: String = input("> "); 
 /// ```
-/// 
-/// 
 pub fn input(prompt: &str) -> String {
     let mut input: String = String::new();
     print!("{}", prompt);
@@ -32,6 +30,7 @@ pub fn input(prompt: &str) -> String {
 /// } else {
 ///     println!("No? Alright then.");   
 /// }
+/// ```
 pub fn confirm(prompt: &str, abort: Option<bool>) -> bool {
     let real_prompt = prompt.to_string() + " [y/n]: ";
 

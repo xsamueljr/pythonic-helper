@@ -1,6 +1,6 @@
 [package]
 name = "pythonic-helper"
-version = "0.1.1"
+version = "0.1.2"
 edition = "2021"
 description = "A library that provides Python-like functions (and some surprises)"
 license = "MIT"
