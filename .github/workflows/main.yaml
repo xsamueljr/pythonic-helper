@@ -26,16 +26,21 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4.1.1
       
+      # Execute the following 4 steps only if the `src/` directory is modified.
       - name: Upgrade Rust tools
+        if: contains(github.event.commits[0].added, 'src/') || contains(github.event.commits[0].modified, 'src/')
         run: rustup update
       
       - name: Build
+        if: contains(github.event.commits[0].added, 'src/') || contains(github.event.commits[0].modified, 'src/')
         run: cargo build
       
       - name: Clippy
+        if: contains(github.event.commits[0].added, 'src/') || contains(github.event.commits[0].modified, 'src/')
         run: cargo clippy
       
       - name: Test
+        if: contains(github.event.commits[0].added, 'src/') || contains(github.event.commits[0].modified, 'src/')
         run: cargo test
       
       - name: Publish
