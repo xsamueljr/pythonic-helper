@@ -36,7 +36,8 @@ jobs:
         run: cargo test
       
       - name: Publish
-        if: (github.event_name == 'push' && github.ref == 'refs/heads/main') || (github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.head.ref == 'main' && github.pull_request.merged == true)
+        # Run only when a new file is added, modified, or the Cargo.toml file is modified. (And the target is the `main` branch)
+        if: (contains(github.event.commits[0].added, 'src/') || contains(github.event.commits[0].modified, 'src/') || contains(github.event.commits[0].modified, 'Cargo.toml')) && (github.event_name == 'push' && github.ref == 'refs/heads/main') || (github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.head.ref == 'main' && github.pull_request.merged == true)
         run: cargo publish
         env:
           CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_REGISTRY_TOKEN }}
