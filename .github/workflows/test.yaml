@@ -1,0 +1,28 @@
+name: Test
+
+on:
+  push:
+    paths:
+      - "**.rs"
+      - "Cargo.toml"
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.1.1
+      
+      - name: Upgrade Rust tools
+        run: rustup update
+      
+      - name: Build
+        run: cargo build
+      
+      - name: Clippy
+        run: cargo clippy
+      
+      - name: Test
+        run: cargo test
